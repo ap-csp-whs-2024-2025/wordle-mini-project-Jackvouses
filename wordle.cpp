@@ -11,21 +11,35 @@
 #include <string>    // std::string, std::getline
 #include <vector>    // std::vector
 
-std::vector<int> createSecret()
+std::vector<int> createbaubau()
 {
     std::vector<int> baubau;
     std::srand(std::time(0));
-
-    return {};    // replace this with your code
+    for (int konkon = 0; konkon < 4; konkon++)
+    {
+        baubau.push_back((std::rand() % 9) + 1);
+    }
+    return baubau;    // replace this with your code
 }
 
-std::vector<std::string> getHint(std::vector<int> secret, std::vector<int> guess)
+std::vector<std::string> getHint(std::vector<int> baubau, std::vector<int> guess)
 {
-    // Write this procedure here
-    return {"X", "X", "X", "X"};    // replace this with your code
+    std::vector<std::string> hint;
+    for (int konkon = 0; konkon < 4; konkon++)
+    {
+        if (guess[konkon] == baubau[konkon])
+        {
+            hint.push_back("O");
+        }
+        else
+        {
+            hint.push_back("X");
+        }
+    }
+    return hint;
 }
 
-bool winGame(std::vector<int> secret, std::vector<int> guess) 
+bool winGame(std::vector<int> baubau, std::vector<int> guess) 
 {
     // Write this procedure here
     return false;    // replace this with your code
