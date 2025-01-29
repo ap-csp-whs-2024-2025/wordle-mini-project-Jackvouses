@@ -52,14 +52,14 @@ int main()
     // srand(time(0));
 
     std::vector<int> baubau = createbaubau();
-    std::vector<int> user_guess = (4, 0);
+    std::vector<int> user_guess(4, 0);
     std::vector<std::string> hint;    // an empty list
-
+    
     int num_guesses = 0;
 
     std::cout << "Welcome to Number Wordle!\n";
     
-    while (!winGame(secret_code, user_guess))    // while you have not won the game yet
+    while (!winGame(baubau, user_guess))    // while you have not won the game yet
     {
         std::cout << "\nEnter your guess: ";
         hint.clear();    // reset the hint for the next guess
@@ -69,7 +69,24 @@ int main()
         {
             int input;
             std::cin >> input;
-            user_guess.push_back(input);    // can also do append(guess, input);
+
+            if (std::cin.fail())
+            {
+                std::cin.clear();
+                std::cin.ignore(1000, '\n');
+                std::cout << "Invalid input! Please enter numbers from 1-9.\n";
+                konkon--;
+                continue;
+            }
+
+            if (input < 1 || input > 9)
+            {
+                std::cout << "Out of range! Please enter numbers from 1-9.\n";
+                konkon--;
+                continue;
+            }
+
+            user_guess.push_back(input);
         }
 
         hint = getHint(baubau, user_guess);
@@ -79,7 +96,7 @@ int main()
         {
             std::cout << h << " ";
         }
-        std::cout << "\n"
+        std::cout << "\n";
 
         num_guesses++;
     }
