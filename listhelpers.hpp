@@ -24,6 +24,11 @@ void append(std::vector<T> &v, T const &val) {
 }
 
 template <typename T>
+void append(std::vector<T> &v, const char *str) {
+  append(v, std::string(str));
+}
+
+template <typename T>
 void insert(std::vector<T> &v, int const i, T const &val) {
   if (i < 0 || i > v.size()) {
     throw std::out_of_range("Index " + std::to_string(i) + " is out of bounds for the list INSERT procedure");
